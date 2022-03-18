@@ -1,5 +1,5 @@
 function computerPlay() {
-    let randNum = Math.floor(Math.random() * 3);
+    const randNum = Math.floor(Math.random() * 3);
 
     if (randNum === 0) {
         return 'Rock';
@@ -14,8 +14,8 @@ function computerPlay() {
 
 function playRound(playerSelection, computerSelection) {
 
-    let player = playerSelection.toLowerCase();
-    let computer = computerSelection.toLowerCase();
+    const player = playerSelection.toLowerCase();
+    const computer = computerSelection.toLowerCase();
 
     if (player === 'rock') {
         if (computer === 'paper') {
