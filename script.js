@@ -124,10 +124,10 @@ function updateScore(result) {
     scoreBoard.textContent = `${playerScore} - ${computerScore}`;
 }
 
-function play(element) {
-    // checks which option was selected
+function play() {
+    // checks which option was selected, plays round and updates score
     outer: for (let i = 0; i < options.length; i++) {
-        if (element.currentTarget.contains(options[i])) {
+        if (this.classList.contains(options[i])) {
             result = playRound(options[i], computerPlay());
             updateScore(result);
             break outer;
