@@ -2,12 +2,15 @@ function computerPlay() {
     const randNum = Math.floor(Math.random() * 3);
 
     if (randNum === 0) {
+        updateComputer("Rock");
         return 'Rock';
     }
     else if (randNum === 1) {
+        updateComputer("Paper");
         return 'Paper';
     }
     else if (randNum === 2) {
+        updateComputer("Scissors");
         return 'Scissors';
     }
 }
@@ -47,44 +50,6 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
-function game() {
-
-    let score = 0;
-
-    // for (let i = 0; i < 5; i++) {
-    let playerSelection = prompt("Rock, paper or scissors?");
-    let computerSelection = computerPlay();
-    let result = playRound(playerSelection, computerSelection);
-
-    if (result === 'Win') {
-        score++;
-        console.log(`You Win! ${playerSelection.toLowerCase()} beats ${computerSelection.toLowerCase()}!`);
-    }
-    else if (result === 'Lose') {
-        score--;
-        console.log(`You Lose! ${computerSelection.toLowerCase()} beats ${playerSelection.toLowerCase()}!`);
-    }
-    else console.log("It's a Tie!");
-    // }
-
-    // if (score < 0) {
-    //     console.log("The computer won the match!");
-    // }
-    // else if (score > 0) {
-    //     console.log("You won the match!");
-    // }
-    // else console.log("You tied the match");
-}
-
-const selectors = document.querySelectorAll('.selector');
-const options = ['rock', 'paper', 'scissors'];
-const scoreBoard = document.querySelector('.score');
-const winnerDiv = document.querySelector('.winner');
-
-let result;
-let playerScore = 0;
-let computerScore = 0;
-
 function displayWinner(winner) {
     if (winner === 'Player') {
         winnerDiv.textContent = 'You win!'
@@ -121,24 +86,92 @@ function updateScore(result) {
         }
     }
 
+    updateScoreBoard();
+}
+
+function updateScoreBoard(){
     scoreBoard.textContent = `${playerScore} - ${computerScore}`;
 }
 
+function updateComputer(result) {
+    if(result === "Rock"){
+        computerResult.src = rockPath
+    }
+    else if(result === "Paper") {
+        computerResult.src = paperPath;
+    }
+    else if(result === "Scissors") {
+        computerResult.src = scissorsPath;
+    }
+
+    computerResult.classList.add("gesture-icon");
+    computerResult.classList.add("computer-result");
+    computerResult.classList.remove("icon-placeholder");
+    computerDiv.appendChild(computerResult);
+}
+
+function updateComputerColor(result) {
+    if (result === 'Win') {
+        computerDiv.style.background = "rgb(0,100,0,0.5)";
+    }
+    else if (result === 'Lose') {
+        computerDiv.style.background = "rgb(100,0,0,0.5)";
+    }
+    else computerDiv.style.background = "rgb(100,100,0,0.5)";
+}
 function play() {
     // checks which option was selected, plays round and updates score
     outer: for (let i = 0; i < options.length; i++) {
         if (this.classList.contains(options[i])) {
             result = playRound(options[i], computerPlay());
             updateScore(result);
+            updateComputerColor(result);
             break outer;
         }
     }
 }
 
+const selectors = document.querySelectorAll('.selector');
+const options = ['rock', 'paper', 'scissors'];
+
+const scoreBoard = document.querySelector('.score');
+const winnerDiv = document.querySelector('.winner');
+const computerDiv = document.querySelector(".computer-container");
+const computerResult = document.createElement("img");
+computerResult.classList.add("icon-placeholder");
+
+const playAgain = document.getElementById("play-again");
+
+const rockPath = "https://cdn-icons-png.flaticon.com/512/2165/2165597.png";
+const paperPath = "https://cdn-icons-png.flaticon.com/512/2165/2165693.png";
+const scissorsPath = "https://cdn-icons-png.flaticon.com/512/2165/2165608.png";
+
+let result;
+let playerScore = 0;
+let computerScore = 0;
+let gamesPlayed = 0;
+
+
 selectors.forEach(element => {
 
     element.addEventListener('click', play);
 
+});
+
+
+
+playAgain.addEventListener('click', () => {
+    playerScore = 0;
+    computerScore = 0;
+    updateScoreBoard();
+    winnerDiv.textContent = "";
+    computerDiv.removeChild(computerResult);
+    computerDiv.style.background = "none";
+    selectors.forEach(element => {
+
+        element.addEventListener('click', play);
+
+    });
 });
 
 

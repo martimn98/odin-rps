@@ -9,18 +9,20 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="score">0 - 0</div>
     <div class="winner"></div>
-    <div class="gestures-container">
-        <div class="rock-container">
-            <input type="image" name="rock button" src="https://cdn-icons-png.flaticon.com/512/2165/2165597.png" alt="rock button" class="selector rock">
-        </div>
-        <div class="paper-container">
-            <input type="image" name="paper button" src="https://cdn-icons-png.flaticon.com/512/2165/2165693.png" alt="rock button" class="selector paper">
-        </div>
-        <div class="scissors-container">
-            <input type="image" name="scissors button" src="https://cdn-icons-png.flaticon.com/512/2165/2165608.png" alt="rock button" class="selector scissors">
-        </div>
+    <div class="score-container">
+        <p>PLAYER</p>
+        <div class="score">0 - 0</div>
+        <p>COMPUTER</p>
     </div>
+    <div class="gestures-container">
+        <input type="image" name="rock button" src="https://cdn-icons-png.flaticon.com/512/2165/2165597.png" alt="rock button" class="selector rock gesture-icon">
+        <input type="image" name="paper button" src="https://cdn-icons-png.flaticon.com/512/2165/2165693.png" alt="rock button" class="selector paper gesture-icon">
+        <input type="image" name="scissors button" src="https://cdn-icons-png.flaticon.com/512/2165/2165608.png" alt="rock button" class="selector scissors gesture-icon">
+
+    </div>
+    <p class="vs">VS</p>
+    <div class="computer-container"></div>
+    <button id="play-again">PLAY AGAIN</button>
 </body>
 </html>
