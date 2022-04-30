@@ -40,20 +40,27 @@ p {
     padding: 1.5rem;
     background: rgb(255,255,255, 0.1);
     border-radius: 1.5rem;
+    gap: 0.5rem;
 }
 
 .gesture-icon {
     width: 10rem;
     height: 10rem;
     filter: invert(1);
-    margin: auto 1rem;
 }
 
-input:hover {
+.selector:hover{
     position: relative;
     bottom: 2px;
     right: 2px;
     filter: invert(1) drop-shadow(8px 8px 5px rgba(0, 0, 0, 0.8));
+}
+
+.selected::before{
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: yellow;
 }
 
 .vs {
@@ -89,4 +96,16 @@ input:hover {
     font-weight: bold;
     color: white;
     background: none;
+}
+
+#play-again:hover{
+    position: relative;
+    bottom: 2px;
+    right: 2px;
+    filter: drop-shadow(8px 8px 5px rgba(0, 0, 0, 0.8));
+}
+
+.selector-background {
+    padding: 0.5rem;
+    border-radius: 1rem;
 }

@@ -59,9 +59,9 @@ function displayWinner(winner) {
     }
 }
 
-
-
 function endGame() {
+
+    gameOver = true;
 
     selectors.forEach(element => {
 
@@ -110,25 +110,58 @@ function updateComputer(result) {
     computerDiv.appendChild(computerResult);
 }
 
-function updateComputerColor(result) {
+function updateComputerColor() {
     if (result === 'Win') {
-        computerDiv.style.background = "rgb(0,100,0,0.5)";
+        computerDiv.style.background = "rgb(100,0,0)";
     }
     else if (result === 'Lose') {
-        computerDiv.style.background = "rgb(100,0,0,0.5)";
+        computerDiv.style.background = "rgb(0,100,0)";
     }
-    else computerDiv.style.background = "rgb(100,100,0,0.5)";
+    else computerDiv.style.background = "rgb(100,100,0)";
 }
-function play() {
+
+function updateSelectedColor(e) {
+    if (result === 'Win') {
+        e.target.parentElement.style.background = "rgb(0,100,0)";
+    }
+    else if (result === 'Lose') {
+        e.target.parentElement.style.background = "rgb(100,0,0)";
+    }
+    else e.target.parentElement.style.background = "rgb(100,100,0)";
+
+    selectors.forEach(element => {
+        if(element != e.target)
+            element.parentElement.style.background = "";
+    });
+}
+
+function play(e) {
     // checks which option was selected, plays round and updates score
     outer: for (let i = 0; i < options.length; i++) {
         if (this.classList.contains(options[i])) {
             result = playRound(options[i], computerPlay());
             updateScore(result);
             updateComputerColor(result);
+            updateSelectedColor(e);
             break outer;
         }
     }
+}
+
+function select(e) {
+    if(gameOver) return;
+
+    e.target.parentElement.classList.add("selected");
+    selectors.forEach(element => {
+        if(element != e.target)
+            element.parentElement.classList.remove("selected");
+    });
+}
+
+function deselectAll() {
+    selectors.forEach(element => {
+            element.parentElement.classList.remove("selected");
+    });
 }
 
 const selectors = document.querySelectorAll('.selector');
@@ -150,19 +183,19 @@ let result;
 let playerScore = 0;
 let computerScore = 0;
 let gamesPlayed = 0;
-
+let gameOver = false;
 
 selectors.forEach(element => {
 
     element.addEventListener('click', play);
+    element.addEventListener('click', select);
 
 });
-
-
 
 playAgain.addEventListener('click', () => {
     playerScore = 0;
     computerScore = 0;
+    gameOver = false;
     updateScoreBoard();
     winnerDiv.textContent = "";
     computerDiv.removeChild(computerResult);
@@ -170,9 +203,8 @@ playAgain.addEventListener('click', () => {
     selectors.forEach(element => {
 
         element.addEventListener('click', play);
+        element.parentElement.style.background = "";
 
     });
+    deselectAll();
 });
-
-
-// console.log(computerPlay());
