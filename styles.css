@@ -12,7 +12,7 @@ body {
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -51,10 +51,13 @@ p {
     align-items: center;
 }
 
-.winner {
-    height: 3rem;
-    margin: 2rem;
+.winner{
+    display: flex;
+    height: 2rem;
+    flex-shrink: 0;
+    margin-top: 1rem;
 }
+
 
 .gestures-container {
     display: flex;
@@ -93,12 +96,8 @@ p {
 }
 
 .computer-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-shrink: 0;
     height: 10rem;
-    width: 10rem;
-    margin: 0 2rem;
     padding: 1rem;
     border-radius: 1.5rem;
 }
